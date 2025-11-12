@@ -214,5 +214,26 @@
 </footer>
 
     <script src="app.js"></script>
+
+    <script>
+    // 1. Obtener los elementos del DOM (Document Object Model)
+    const mobileMenu = document.getElementById('mobile-menu'); // El ícono ☰
+    const navLinks = document.querySelector('.nav-links'); // La lista de enlaces (el menú)
+
+    // 2. Agregar un "escuchador" de eventos al ícono del menú
+    mobileMenu.addEventListener('click', () => {
+        // Al hacer clic, alterna la clase 'active' en la lista de enlaces
+        navLinks.classList.toggle('active');
+    });
+
+    // 3. (Opcional pero Recomendado) Cierra el menú al hacer clic en un enlace
+    // Esto es para que el menú se oculte automáticamente después de seleccionar una sección.
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+</script>
+
 </body>
 </html>

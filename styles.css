@@ -592,3 +592,23 @@ footer p {
         grid-template-columns: 1fr; /* Una sola columna en móviles */
     }
 }
+
+@media (max-width: 768px) {
+    /* El menú está escondido por defecto en móviles */
+    .nav-links {
+        display: none; /* ¡Clave para esconderlo! */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px; 
+        left: 0;
+        background-color: #111; /* Fondo del menú desplegable */
+        padding: 10px 0;
+        z-index: 100;
+    }
+
+    /* La clase 'active' lo hace visible */
+    .nav-links.active {
+        display: flex; /* ¡Clave para mostrarlo! */
+    }
+}
