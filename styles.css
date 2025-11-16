@@ -1,524 +1,663 @@
-/* ---------------------------------- */
-/* 0. RESET Y TIPOGRAFÍA DE LUJO */
-/* ---------------------------------- */
+/* Variables para fácil manejo de color de acento */
 :root {
-    --color-text-dark: #111; /* Negro profundo */
-    --color-text-light: #fff;
-    --color-bg-primary: #fff;
-    --color-bg-secondary: #f4f4f4; /* Gris muy sutil */
-    --color-cta: #111; /* Botones negros */
-    
-    /* Tipografías: Playfair para Lujo, Poppins para Legibilidad */
-    --font-luxury: 'Playfair Display', serif;
-    --font-body: 'Poppins', sans-serif;
+    --color-fondo: #0A0A0A; /* Negro muy oscuro */
+    --color-texto: #F0F0F0; /* Blanco roto */
+    --color-acento: #ff1e00; /* Cian eléctrico/Neón */
 }
 
+/* Reset de Márgenes y Tipografía Base */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: var(--font-body);
-    color: var(--color-text-dark);
+    font-family: 'Arial', sans-serif; /* Puedes cambiar por 'Oswald' o 'Montserrat' */
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
     line-height: 1.6;
-    background-color: var(--color-bg-primary);
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif; /* Fuente audaz para títulos */
+    color: var(--color-acento); /* Los títulos principales en neón */
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 20px;
 }
 
 a {
+    color: var(--color-texto);
     text-decoration: none;
-    color: var(--color-text-dark);
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
-/* Títulos usan la fuente de lujo */
-h1, h2 {
-    font-family: var(--font-luxury);
-    font-weight: 400; /* La delgadez es clave para la elegancia */
+a:hover {
+    color: var(--color-acento); /* Efecto neón al pasar el ratón */
 }
 
-/* ---------------------------------- */
-/* 1. HEADER FIJO Y MINIMALISTA */
-/* ---------------------------------- */
-.fixed-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparente sobre el Hero */
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Sombra muy sutil */
-    padding: 20px 5%;
+.section-padding {
+    padding: 80px 5%;
+}
+
+.section-dark {
+    background-color: #1a1a1a; /* Un gris oscuro sutil para diferenciar secciones */
+    padding: 80px 5%;
+}
+
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px 5%;
+    position: fixed; /* Barra fija en la parte superior */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: transparent; /* Transparente por defecto */
+    transition: background-color 0.4s ease;
+}
+
+/* Clase añadida con JavaScript al hacer scroll */
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.95); /* Fondo oscuro semitransparente al scrollear */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
-    font-family: var(--font-luxury);
     font-size: 1.8em;
-    letter-spacing: 5px; /* Espaciado que imita el logo original */
-    font-weight: 300;
+    font-weight: 700;
+    color: var(--color-acento);
 }
 
-.main-nav ul {
-    list-style: none;
+.nav-links {
     display: flex;
-    align-items: center;
+    list-style: none;
 }
 
-.main-nav li {
+.nav-links li {
     margin-left: 30px;
 }
 
-.main-nav a {
-    text-transform: uppercase;
-    font-size: 0.85em;
-    font-weight: 500;
-    letter-spacing: 1px;
+.nav-links a {
+    font-weight: 600;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
 }
 
-.main-nav a:hover, .main-nav a.active {
-    color: #b8860b; /* Dorado sutil para hover */
+.nav-links a:hover {
+    color: var(--color-acento);
+    border-bottom: 2px solid var(--color-acento); /* Subrayado neón */
 }
 
-.cart-btn {
-    background: none;
-    border: none;
+.menu-toggle {
+    display: none; /* Oculto en desktop */
+    font-size: 2em;
     cursor: pointer;
-    font-size: 1em;
-    margin-left: 20px;
-    padding: 0;
 }
 
-/* ---------------------------------- */
-/* 2. HERO SECTION (PANTALLA COMPLETA) */
-/* ---------------------------------- */
-.full-height-section {
-    min-height: 100vh;
+#inicio {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    
-    /* Reemplaza con una imagen de alta calidad */
-    background: url('../img/sasha\ portada.png') no-repeat center center/cover;
+    background-image: url('img/hero_background.jpg'); /* ¡CAMBIA ESTA RUTA! */
+    background-size: cover;
+    background-position: center;
     position: relative;
-    color: var(--color-text-light);
-    
-    /* Efecto de oscurecimiento sutil para que el texto destaque */
-    background-color: rgba(0, 0, 0, 0.3);
-    background-blend-mode: multiply;
+    /* Efecto de capa oscura sobre la imagen para alto contraste */
+}
+
+#inicio::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* 60% de opacidad negra */
+    z-index: 1;
 }
 
 .hero-content {
-    max-width: 800px;
+    position: relative;
+    z-index: 2;
     padding: 20px;
 }
 
-.luxury-title {
-    font-size: 4.5em; /* Título de gran impacto */
-    margin-bottom: 20px;
-    line-height: 1.1;
-    font-weight: 400;
-}
-
-.luxury-cta {
-    background-color: transparent;
-    border: 1px solid var(--color-text-light);
-    color: var(--color-text-light);
-    padding: 12px 40px;
-    font-size: 0.9em;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    transition: all 0.3s ease;
-}
-
-.luxury-cta:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* ---------------------------------- */
-/* 3. GRID DE PRODUCTOS (MUCHO ESPACIO BLANCO) */
-/* ---------------------------------- */
-/* Reducir el espaciado alrededor de la sección de productos */
-.product-grid-section {
-    /* ANTES: 80px 5% */
-    padding: 60px 5%; 
-    text-align: center;
-}
-
-/* Reducir el relleno de la información de la tarjeta */
-.card-info {
-    /* Puedes reducir el padding si necesitas más espacio */
-    padding: 15px 0; 
-    text-align: left;
-}
-
-.section-title {
-    font-size: 2.5em;
-    margin-bottom: 60px;
-    text-align: center;
-}
-
-.product-grid {
-    display: grid;
-    /* NUEVO: minmax(200px, 1fr) permite que quepan hasta 4 o 5 tarjetas.
-       A 200px, obtendrás 4 columnas en la mayoría de los escritorios.
-    */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px; /* Un poco menos de espacio para que quepan */
-}
-
-.product-card {
-    background: var(--color-bg-primary);
-    text-align: left;
-    transition: opacity 0.3s;
-}
-
-.product-card img {
-    width: 100%;
-    /* ¡CAMBIO CRUCIAL! Quitamos la altura fija (400px) 
-       y usamos la altura automática. */
-    height: auto; 
-    
-    /* CAMBIO CLAVE: Usa 'contain' para mostrar la imagen completa 
-       sin cortar, pero puede haber espacio blanco a los lados si las 
-       dimensiones no coinciden perfectamente con el espacio. */
-    object-fit: contain; 
-    margin-bottom: 15px;
-}
-
-.product-card:hover {
-    opacity: 0.8; /* Efecto sutil al pasar el mouse */
-}
-
-.product-name {
-    font-family: var(--font-luxury);
-    font-size: 1.2em;
-    margin-bottom: 5px;
-    font-weight: 500;
-}
-
-.price {
-    font-size: 0.9em;
-    color: #666;
+.hero-content h2 {
+    font-size: 4em;
     margin-bottom: 10px;
+    /* Efecto de sombra neón en el texto */
+    text-shadow: 0 0 10px var(--color-acento), 0 0 20px var(--color-acento);
+    color: #FFF; /* Texto blanco brillante */
 }
 
-.add-to-cart {
-    background-color: var(--color-text-dark);
-    color: var(--color-text-light);
-    border: none;
-    padding: 8px 15px;
-    border-radius: 0; /* Sin bordes redondeados */
-    cursor: pointer;
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: 0.75em;
-    letter-spacing: 1px;
-    transition: background-color 0.3s;
-}
-
-.add-to-cart:hover {
-    background-color: #555;
-}
-
-/* ---------------------------------- */
-/* 4. SECCIÓN DE CONTACTO Y FOOTER */
-/* ---------------------------------- */
-.contact-section {
-    padding: 80px 5%;
-    background-color: var(--color-bg-secondary); /* Fondo sutilmente diferente */
-}
-
-.contact-form {
-    max-width: 500px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.contact-form input,
-.contact-form textarea {
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 0;
-    font-family: var(--font-body);
-}
-
-.contact-form .luxury-cta {
-    background-color: var(--color-cta);
-    border: none;
-    align-self: flex-start; /* Alinea el botón a la izquierda */
-    padding: 12px 30px;
-}
-
-.contact-form .luxury-cta:hover {
-    background-color: #555;
-}
-
-.main-footer {
-    background-color: var(--color-text-dark);
-    color: var(--color-bg-secondary);
-    padding: 60px 5%;
-    font-size: 0.9em;
-}
-
-.footer-columns {
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.col-info h3 {
-    font-family: var(--font-luxury);
+.hero-content p {
     font-size: 1.5em;
-    letter-spacing: 3px;
-    margin-bottom: 20px;
-}
-
-.col-links h4 {
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.9em;
-    margin-bottom: 15px;
-}
-
-.col-links ul {
-    list-style: none;
-}
-
-.col-links a {
-    color: var(--color-bg-secondary);
-    display: block;
-    padding: 5px 0;
+    margin-bottom: 30px;
     font-weight: 300;
 }
 
-.col-links a:hover {
-    color: var(--color-text-light);
-}
-
-/* ---------------------------------- */
-/* MEDIA QUERIES (RESPONSIVE) */
-/* ---------------------------------- */
-@media (max-width: 900px) {
-    .hero-content h1 {
-        font-size: 3em;
-    }
-    .footer-columns {
-        flex-direction: column;
-        text-align: center;
-    }
-    .col-info, .col-links {
-        margin-bottom: 30px;
-    }
-}
-@media (max-width: 600px) {
-    .fixed-header {
-        flex-direction: column;
-        align-items: center;
-    }
-    .main-nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 10px;
-    }
-    .main-nav li {
-        margin: 5px 10px;
-    }
-    .hero-content h1 {
-        font-size: 2em;
-    }
-}
-
-/* ---------------------------------- */
-/* ESTILOS DE LA VENTANA MODAL (CARRITO) */
-/* ---------------------------------- */
-.modal {
-    /* Por defecto, está oculta */
-    display: none; 
-    position: fixed;
-    z-index: 2000; /* Asegura que esté sobre todo (incluido el header fijo) */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente y oscuro */
-}
-
-.modal-content {
-    background-color: var(--color-bg-primary);
-    margin: 5% auto; /* Centrar verticalmente */
-    padding: 30px;
-    border: 1px solid #888;
-    width: 90%;
-    max-width: 500px; /* Tamaño elegante y contenido */
-    position: relative;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    border-radius: 0; /* Mantenemos el estilo minimalista sin bordes redondeados */
-}
-
-.close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: var(--color-text-dark);
-    text-decoration: none;
-}
-
-.modal-title {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-}
-
-/* Estilos de los productos en la lista */
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    font-size: 1em;
-}
-
-.cart-summary {
-    text-align: right;
-    padding: 20px 0 10px;
-    font-size: 1.2em;
-    font-weight: 600;
-}
-
-.checkout-btn {
-    width: 100%;
-    text-align: center;
-    margin-top: 15px;
-}
-
-.remove-item-btn {
-    background: none;
+.cta-button {
+    background-color: var(--color-acento);
+    color: var(--color-fondo);
+    padding: 15px 30px;
     border: none;
-    color: red;
     cursor: pointer;
-    font-size: 0.9em;
-    margin-left: 15px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    /* Efecto de borde neón */
+    border: 2px solid var(--color-acento);
 }
 
-.empty-message {
-    color: #888;
-    text-align: center;
-    padding: 30px 0;
+.cta-button:hover {
+    background-color: transparent; /* Invertir colores al hacer hover */
+    color: var(--color-acento);
+    /* Mantener el efecto de sombra */
+    box-shadow: 0 0 10px var(--color-acento);
 }
 
-/* ---------------------------------- */
-/* ESTILOS DE LA MODAL DE DETALLE DE PRODUCTO */
-/* ---------------------------------- */
-.product-detail-content {
-    /* Sobrescribe el ancho de la modal del carrito */
-    max-width: 900px; 
-    margin: 3% auto; /* Un poco más alto para dejar espacio para el contenido */
+/* Estilo para el álbum destacado que contiene el reproductor */
+.album-card.destacado {
+    /* Ocupa todo el ancho en móviles */
+    grid-column: 1 / -1; 
+    
+    /* Fondo más agresivo para el track principal */
+    background: #000;
     padding: 30px;
 }
 
-.detail-close-btn {
-    /* Asegura que el botón de cerrar de esta modal se vea bien */
-    position: absolute;
-    top: 15px;
-    right: 30px;
+/* En la cuadrícula, haz que el destacado ocupe 2 columnas en desktop */
+@media (min-width: 900px) {
+    .discografia-grid {
+        /* Asegúrate de que esta regla exista en tu CSS */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .album-card.destacado {
+        grid-column: span 2; /* Que ocupe 2 de las 3 columnas */
+        /* Centrarlo manualmente si la cuadrícula es de 3 */
+        margin: 0 auto; 
+    }
 }
 
-.detail-grid {
+#tour {
+    /* Usa el padding general de la clase .section-padding */
+    text-align: center;
+    background-color: var(--color-fondo);
+}
+
+#tour h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+.tour-list {
+    list-style: none; /* Elimina los puntos por defecto de la lista */
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.tour-list li {
+    display: flex; /* Usamos flexbox para alinear elementos */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    align-items: center;
+    
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
+    
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, border-left 0.3s ease;
+}
+
+/* Efecto de hover que destaca el evento */
+.tour-list li:hover {
+    background-color: #1a1a1a; /* Fondo ligeramente más oscuro al pasar el ratón */
+    border-left: 5px solid var(--color-acento); /* Borde lateral neón */
+    padding-left: 15px; /* Ajusta el padding para compensar el borde */
+}
+
+/* Estilo para el último elemento, para que no tenga borde inferior */
+.tour-list li:last-child {
+    border-bottom: none;
+}
+
+/* Estilo para la fecha (ej: "25 Nov") */
+.tour-list li strong {
+    color: var(--color-acento); /* La fecha se destaca en neón */
+    font-weight: bold;
+    min-width: 100px; /* Asegura que la fecha tenga un ancho mínimo consistente */
+}
+
+/* Estilo del botón/enlace de Tickets */
+.ticket-link {
+    background-color: transparent;
+    color: var(--color-acento);
+    border: 2px solid var(--color-acento);
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.ticket-link:hover {
+    background-color: var(--color-acento);
+    color: var(--color-fondo);
+    /* Desactivamos el efecto de hover general para este enlace */
+}
+
+@media (max-width: 600px) {
+    .tour-list li {
+        flex-direction: column; /* Apila fecha, lugar y tickets */
+        align-items: flex-start;
+        padding: 15px 5%;
+    }
+    
+    .tour-list li strong {
+        margin-bottom: 5px;
+    }
+    
+    .tour-list li span {
+        /* Espacio para el lugar */
+        margin-bottom: 10px;
+    }
+    
+    .ticket-link {
+        align-self: flex-end; /* Mueve el botón de tickets a la derecha */
+    }
+}
+
+/* Estilos del Pie de Página (Footer) */
+footer {
+    background-color: #000;
+    padding: 40px 5%; /* Aumentamos el padding para dar más aire */
+    text-align: center;
+    border-top: 3px solid var(--color-acento);
+}
+
+.social-links {
+    margin-bottom: 25px; /* Más espacio entre los íconos y el texto */
+}
+
+.social-links a {
+    /* ¡CAMBIO AQUÍ! Aumentamos el tamaño de 2.5em a 3.5em */
+    display: inline-block;
+    font-size: 3.5em; 
+    margin: 0 25px; /* Aumentamos el espacio entre íconos */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--color-acento);
+    transform: scale(1.15); /* Aumentamos ligeramente la escala al hacer hover */
+}
+
+footer p {
+    font-size: 1em; /* Un poco más grande para el texto del contacto */
+    color: #888;
+    margin-top: 10px;
+}
+
+/* Dentro de tu sección de CSS para el Navbar */
+.logo {
+    font-family: 'Oswald', sans-serif; /* Aplicamos Oswald */
+    font-size: 1.8em; /* Mantén el tamaño o ajústalo si es necesario */
+    font-weight: 700; /* Asegura que sea negrita */
+    color: var(--color-acento); /* Color neón */
+    letter-spacing: 1px; /* Espaciado entre letras para un look más "urbano" */
+    text-transform: uppercase;
+}
+
+/* Si "IMAGINA" es un subtítulo para el Hero Section, NO para el logo de la nav */
+.hero-content p { /* O si creas una clase específica para el subtítulo del hero */
+    font-family: 'Lora', serif; /* Aplicamos Lora */
+    font-size: 1.5em; /* Ajusta el tamaño */
+    color: #FFF; /* O el color que desees, quizás un rojo oscuro como en tu imagen */
+    margin-top: 10px;
+}
+
+/* Estilo para el contenedor que centra el formulario */
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #1a1a1a; /* Fondo gris oscuro */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra sutil */
+}
+
+/* Título de la sección */
+#contacto h2 {
+    margin-bottom: 10px;
+}
+
+.sub-heading {
+    text-align: center;
+    color: #999;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-acento); /* Etiquetas en neón */
+    font-weight: bold;
+    font-size: 0.95em;
+    text-transform: uppercase;
+}
+
+/* ==================================== */
+/* 2. ESTILOS DE LA SECCIÓN BIO (ACERCA DE MÍ) */
+/* ==================================== */
+
+/* (Mantén los estilos de #bio y .bio-container como están) */
+
+/* Contenedor de la imagen: Aquí aplicamos el fondo rojo */
+.bio-image {
+    background-color: #E20000; /* Fondo rojo fuerte, puedes ajustar el tono */
+    border-radius: 8px; /* Redondea las esquinas del bloque rojo */
+    display: flex; /* Usamos flexbox para centrar la imagen PNG */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    overflow: hidden; /* Asegura que la imagen no se salga del contenedor */
+    min-height: 400px; /* Altura mínima para el bloque rojo (ajusta si es necesario) */
+    position: relative; /* Para la sombra/resplandor */
+    
+    /* Agregamos una sombra para darle profundidad al bloque rojo */
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo de la Imagen de Prensa (el PNG transparente) */
+.bio-image img {
+    width: 100%; /* La imagen ocupa el ancho completo del contenedor (o se escala) */
+    max-width: 350px; /* Limita el ancho de la imagen real para que no sea enorme */
+    height: auto;
+    object-fit: contain; /* Asegura que la imagen se vea completa sin cortar */
+    display: block; /* Para evitar espacios extra */
+    
+    /* Si quieres un ligero resplandor neón alrededor de Valen (sobre el fondo rojo) */
+    /* text-shadow: 0 0 10px var(--color-acento); -- Esto sería para texto, no imagen */
+    /* Para imágenes, podrías intentar un filter: drop-shadow, pero es complejo con transaparencias */
+    /* O simplemente dejar el resplandor en el contenedor rojo si ya te gusta */
+
+    /* Quito los filtros y transiciones anteriores para la imagen, ya que la imagen es PNG y el fondo rojo lo tiene el contenedor */
+    transition: transform 0.3s ease; /* Solo una pequeña animación al pasar el ratón */
+}
+
+.bio-image img:hover {
+    transform: scale(1.03); /* Un ligero zoom al pasar el ratón */
+}
+
+
+/* (Mantén el resto de .bio-content y media queries como están) */
+
+/* ==================================== */
+/* 2. ESTILOS DE LA SECCIÓN BIO (ACERCA DE MÍ) */
+/* ==================================== */
+
+#bio {
+    /* La clase .section-dark le da el fondo oscuro */
+    text-align: center;
+}
+
+.bio-container {
     display: grid;
-    grid-template-columns: 2fr 1fr; /* 2/3 para imagen, 1/3 para información */
-    gap: 30px;
+    /* Dos columnas: 1 parte para la imagen, 2 partes para el contenido */
+    grid-template-columns: 1fr 2fr; 
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+    align-items: center; /* Centrar verticalmente el contenido */
 }
 
-/* Galería de Imágenes */
-.image-gallery img {
+/* Estilo de la Imagen de Prensa */
+.bio-image img {
     width: 100%;
     height: auto;
-    object-fit: cover;
-    margin-bottom: 15px;
+    border-radius: 8px;
+    /* Borde grueso con sombra neón para enmarcar la foto */
+    border: 5px solid var(--color-acento); 
+    box-shadow: 0 0 20px var(--color-acento);
+    filter: grayscale(40%); /* Un toque de blanco y negro para drama (Opcional) */
+    transition: all 0.5s ease;
 }
 
-.thumbnails {
-    display: flex;
-    gap: 10px;
+.bio-image img:hover {
+    filter: grayscale(0%); /* Color completo al pasar el ratón */
+    box-shadow: 0 0 30px var(--color-acento);
 }
 
-.thumbnails img {
-    width: 80px;
-    height: 80px;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-}
-
-.thumbnails img:hover {
-    opacity: 1;
-    border: 1px solid var(--color-text-dark);
-}
-
-/* Información del Producto */
-.product-info-detail {
+/* Estilo del Contenido de Texto */
+.bio-content h3 {
     text-align: left;
-    padding-top: 20px;
-}
-
-.detail-title {
-    font-size: 2.2em;
-    margin-bottom: 10px;
-    font-family: var(--font-luxury);
-}
-
-.detail-price {
-    font-size: 1.5em;
-    font-weight: 600;
-    color: var(--color-text-dark);
+    color: var(--color-texto);
+    font-size: 1.8em;
+    border-bottom: 2px solid var(--color-acento);
+    padding-bottom: 10px;
     margin-bottom: 20px;
 }
 
-.detail-description {
-    font-size: 1em;
-    margin-bottom: 30px;
+.bio-content p {
+    margin-bottom: 15px;
+    font-size: 1.05em;
     line-height: 1.7;
+    color: #CCC;
 }
 
-.options select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    font-family: var(--font-body);
+/* Enlace/Botón para el Press Kit */
+.presskit-link {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 20px;
+    background-color: var(--color-fondo);
+    color: var(--color-acento);
+    border: 2px solid var(--color-acento);
+    border-radius: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
-/* Estilo para el botón de "Añadir al Carrito" dentro de la modal */
-.product-info-detail .luxury-cta {
-    width: 100%;
-    text-align: center;
-    border: none;
-    background-color: var(--color-cta);
-    color: var(--color-text-light);
+.presskit-link:hover {
+    background-color: var(--color-acento);
+    color: var(--color-fondo);
 }
 
-/* Responsividad para la modal de detalle */
+/* ==================================== */
+/* 3. MEDIA QUERIES (RESPONSIVE) */
+/* ==================================== */
+
 @media (max-width: 768px) {
-    .detail-grid {
+
+    /* Aseguramos que el contenedor de la navegación y el logo no desborden */
+    .navbar {
+        padding: 10px 5px; 
+        display: flex;
+        justify-content: space-between; 
+        align-items: center;
+    }
+
+    /* Restauramos la visibilidad y alineación horizontal */
+    .nav-links {
+        display: flex; /* Se mantiene visible siempre */
+        flex-direction: row; /* Siempre horizontal */
+        position: static; /* Quita el posicionamiento absoluto */
+        width: auto;
+        padding: 0;
+        margin-left: 10px;
+    }
+
+    /* Reducimos el tamaño de los elementos para que quepan */
+    .nav-links li {
+        margin: 0 3px; /* Espacio mínimo entre enlaces */
+    }
+
+    .nav-links li a {
+        font-size: 0.7em; /* Letra pequeña */
+        padding: 5px 5px; /* Padding reducido */
+    }
+
+    /* El logo también debe reducirse */
+    .logo {
+        font-size: 1.2em;
+    }
+
+    /* Asegúrate de que todas las demás reglas de .nav-links li y a (como los bordes que pusimos) se eliminen o se anulen aquí. */
+
+    /* --- Otras secciones móviles --- */
+    .bio-container { 
+        grid-template-columns: 1fr;
+    }
+    /* ... etc. */
+}
+
+/* Estilos para la Cuadrícula de Videos Secundarios */
+.video-grid {
+    display: grid;
+    /* 3 columnas en desktop, que se ajustan automáticamente */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 40px auto 0 auto;
+}
+
+.video-item {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto Hover: Resplandor Neón en la caja */
+.video-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 
+                0 0 15px var(--color-acento); /* Sombra y Neón */
+}
+
+.video-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+/* Oscurecer la imagen al pasar el ratón */
+.video-item:hover img {
+    filter: brightness(0.6);
+}
+
+/* Overlay (Capa superpuesta) para el botón de Play */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente */
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.3s ease;
+}
+
+.video-item:hover .video-overlay {
+    opacity: 1; /* Se muestra al pasar el ratón */
+}
+
+.video-overlay .fa-play {
+    font-size: 3em;
+    color: var(--color-acento); /* Ícono de Play en neón */
+    border: 3px solid var(--color-acento);
+    border-radius: 50%;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.video-overlay .fa-play:hover {
+    transform: scale(1.1);
+}
+
+.video-item h4 {
+    color: var(--color-texto);
+    font-size: 1em;
+    padding: 10px 0;
+    background-color: #1a1a1a; /* Fondo para el título */
+    margin: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Media Query para Móviles */
+@media (max-width: 600px) {
+    .video-grid {
         grid-template-columns: 1fr; /* Una sola columna en móviles */
     }
-    .modal-content.product-detail-content {
-        margin: 10px auto;
-        padding: 20px;
-    }
 }
+
+@media (max-width: 768px) {
+    /* Header/Nav: Aseguramos que los elementos quepan */
+    .navbar {
+        padding: 10px 5px; /* Reducimos el padding de la barra para ganar espacio */
+        display: flex;
+        justify-content: space-between; /* Distribuye el logo y los enlaces */
+        align-items: center;
+    }
+
+    /* Forzamos al menú a mostrarse y a alinearse horizontalmente */
+    .nav-links {
+        display: flex !important; /* Mantenemos siempre visible */
+        flex-direction: row; /* Aseguramos que sea horizontal */
+        position: static; /* Quitamos la posición absoluta */
+        width: auto;
+        padding: 0;
+        margin-left: 10px;
+    }
+
+    /* Ajustamos el tamaño de fuente y espaciado de los enlaces */
+    .nav-links li {
+        margin: 0 3px; /* Espacio mínimo entre enlaces */
+    }
+    
+    .nav-links li a {
+        font-size: 0.7em; /* ¡REDUCIMOS MUCHO EL TAMAÑO DE LA FUENTE! */
+        padding: 5px 5px; /* Reducimos el padding interno del enlace */
+        text-transform: uppercase;
+    }
+
+    /* El logo también debe reducirse para dejar espacio */
+    .logo {
+        font-size: 1.2em;
+    }
+    
+    /* ⚠️ Asegúrate de que no haya ninguna regla .nav-links.active { display: flex; } */
+    /* ⚠️ Asegúrate de que no haya ninguna regla display: none; para .nav-links */
+}
+
+    /* La clase 'active' lo hace visible */
+    .nav-links.active {
+        display: flex; /* ¡Clave para mostrarlo! */
+    }
