@@ -488,22 +488,47 @@ footer p {
 /* ==================================== */
 
 @media (max-width: 768px) {
-    /* ... (otros media queries) ... */
-    
-    .bio-container {
-        /* Se convierte en una sola columna */
-        grid-template-columns: 1fr; 
-        gap: 30px;
+
+    /* Aseguramos que el contenedor de la navegación y el logo no desborden */
+    .navbar {
+        padding: 10px 5px; 
+        display: flex;
+        justify-content: space-between; 
+        align-items: center;
     }
 
-    .bio-content h3, .bio-content p {
-        text-align: center; /* Centrar el texto en móviles */
+    /* Restauramos la visibilidad y alineación horizontal */
+    .nav-links {
+        display: flex; /* Se mantiene visible siempre */
+        flex-direction: row; /* Siempre horizontal */
+        position: static; /* Quita el posicionamiento absoluto */
+        width: auto;
+        padding: 0;
+        margin-left: 10px;
     }
 
-    .bio-image {
-        /* La imagen se muestra primero en móviles */
-        order: -1; 
+    /* Reducimos el tamaño de los elementos para que quepan */
+    .nav-links li {
+        margin: 0 3px; /* Espacio mínimo entre enlaces */
     }
+
+    .nav-links li a {
+        font-size: 0.7em; /* Letra pequeña */
+        padding: 5px 5px; /* Padding reducido */
+    }
+
+    /* El logo también debe reducirse */
+    .logo {
+        font-size: 1.2em;
+    }
+
+    /* Asegúrate de que todas las demás reglas de .nav-links li y a (como los bordes que pusimos) se eliminen o se anulen aquí. */
+
+    /* --- Otras secciones móviles --- */
+    .bio-container { 
+        grid-template-columns: 1fr;
+    }
+    /* ... etc. */
 }
 
 /* Estilos para la Cuadrícula de Videos Secundarios */
@@ -594,21 +619,45 @@ footer p {
 }
 
 @media (max-width: 768px) {
-    /* El menú está escondido por defecto en móviles */
-    .nav-links {
-        display: none; /* ¡Clave para esconderlo! */
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: 60px; 
-        left: 0;
-        background-color: #111; /* Fondo del menú desplegable */
-        padding: 10px 0;
-        z-index: 100;
+    /* Header/Nav: Aseguramos que los elementos quepan */
+    .navbar {
+        padding: 10px 5px; /* Reducimos el padding de la barra para ganar espacio */
+        display: flex;
+        justify-content: space-between; /* Distribuye el logo y los enlaces */
+        align-items: center;
     }
+
+    /* Forzamos al menú a mostrarse y a alinearse horizontalmente */
+    .nav-links {
+        display: flex !important; /* Mantenemos siempre visible */
+        flex-direction: row; /* Aseguramos que sea horizontal */
+        position: static; /* Quitamos la posición absoluta */
+        width: auto;
+        padding: 0;
+        margin-left: 10px;
+    }
+
+    /* Ajustamos el tamaño de fuente y espaciado de los enlaces */
+    .nav-links li {
+        margin: 0 3px; /* Espacio mínimo entre enlaces */
+    }
+    
+    .nav-links li a {
+        font-size: 0.7em; /* ¡REDUCIMOS MUCHO EL TAMAÑO DE LA FUENTE! */
+        padding: 5px 5px; /* Reducimos el padding interno del enlace */
+        text-transform: uppercase;
+    }
+
+    /* El logo también debe reducirse para dejar espacio */
+    .logo {
+        font-size: 1.2em;
+    }
+    
+    /* ⚠️ Asegúrate de que no haya ninguna regla .nav-links.active { display: flex; } */
+    /* ⚠️ Asegúrate de que no haya ninguna regla display: none; para .nav-links */
+}
 
     /* La clase 'active' lo hace visible */
     .nav-links.active {
         display: flex; /* ¡Clave para mostrarlo! */
     }
-}
